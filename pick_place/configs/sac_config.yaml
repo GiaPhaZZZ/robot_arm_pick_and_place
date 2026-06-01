@@ -1,0 +1,60 @@
+# SAC Hyperparameters — Chen et al. (2023) Table 1, adapted for 5-DOF arm
+sac:
+  optimizer: adam
+  learning_rate: 0.001
+  replay_buffer_size: 200000
+  batch_size: 64
+  discount_factor: 0.99          # gamma
+  target_smoothing: 0.005        # tau
+  entropy_temperature: 0.01      # alpha
+  hidden_dim: 64
+  cnn_channels: [32, 64, 64]    # three CNN layers (paper Fig 7)
+  depth_image_size: [64, 64]    # state is 64x64x1 depth crop (paper §4.1.1)
+
+training:
+  max_episodes: 3000
+  max_steps_per_episode: 50     # Runs exactly 5 steps per episode
+  fixed_pose_episodes: 1000       # 3 fixed episodes to cover the total budget
+  random_pose_episodes: 2000      # 0 random episodes (Total remains 3)
+  eval_interval: 50             # Evaluate at the end of every single episode
+  save_interval: 100             # Checkpoint at the end of every single episode
+  checkpoint_dir: checkpoints/
+  log_dir: logs/
+
+  num_envs: 6                  # parallel Gazebo instances
+  sync_steps: 10   
+
+environment:
+  ros_timeout: 10.0              # seconds to wait for ROS topics
+  step_sleep: 0.15               # seconds between phase commands
+  phase_dwell:
+    home: 2.5
+    pre_pick: 3.5
+    pick: 2.5
+    close_gripper: 2.0
+    lift: 2.5
+    arc_via: 3.0
+    pre_place: 3.5
+    open_gripper: 2.0
+
+gripper:
+  open: 0.0
+  close: 0.5
+  close_threshold: 0.3           # below = definitely open
+
+camera:
+  height_m: 1.0                 # 50 cm above table (table is at z=0.5)
+  tilt_deg: 50.0
+  pose_xyz: [0.15, 0.0, 1.0]
+  fx: 554.26
+  fy: 554.26
+  cx: 320.0
+  cy: 240.0
+  image_width: 640
+  image_height: 480
+
+drop_zone:
+  position: [-0.10, 0.00, 0.501]
+  tolerance_xy: 0.05             # success if object lands within 5cm
+
+robot_base: [0.10, 0.00, 0.50]

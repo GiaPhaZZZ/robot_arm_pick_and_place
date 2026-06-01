@@ -1,0 +1,69 @@
+# Graspable objects in pick_and_place.sdf
+# Each entry provides the SDF pose and paper-derived grasp hints.
+# The SAC agent LEARNS to improve on these hints through RL.
+
+objects:
+  small_cube:
+    sdf_pose: [0.41, 0.15, 0.515, 0, 0, 0]
+    label_hint: ["cube", "box", "block"]
+    grasp_hints:
+      HOME:      [0.0,    0.0,   0.0,  0.0,  0.0]
+      PRE_PICK:  [0.725,  0.0,   0.0,  0.0,  0.0]
+      PICK:      [0.725, -1.65,  0.3,  0.4,  0.0]
+      LIFT:      [0.725, -0.7,   0.3,  0.4,  0.0]
+      ARC_VIA:   [0.725, -1.5,   0.0,  1.6,  0.0]
+      PRE_PLACE: [1.56,  -1.5,   0.0,  1.6,  0.0]
+    # SAC action noise ranges (delta from hints the agent can explore)
+    action_delta_range:
+      j1: 0.4    # ±0.4 rad
+      j2: 0.5
+      j3: 0.4
+      j4: 0.5
+      j5: 0.3
+
+  large_cube:
+    sdf_pose: [0.5, 0.0, 0.515, 0, 0, 0]
+    label_hint: ["cube", "box"]
+    grasp_hints:
+      HOME:      [0.0,   0.0,   0.0,  0.0,  0.0]
+      PRE_PICK:  [0.0,  0.0, 0.0, 0.0, 0.0]
+      PICK:      [0.0,  -1.75, 0.3, 0.625, 0.0]
+      LIFT:      [0.0,  -0.7, 0.3, 0.4, 0.0]
+      ARC_VIA:   [1.56, -0.7, 0.3, 0.4, 0.0]
+      PRE_PLACE: [1.56, -0.8,   0.0,  1.0,  0.0]
+    action_delta_range:
+      j1: 0.4
+      j2: 0.5
+      j3: 0.4
+      j4: 0.5
+      j5: 0.3
+
+  peg_cylinder:
+    sdf_pose: [0.41, -0.17, 0.525, 0, 0, 0]
+    label_hint: ["cylinder", "bottle", "cup", "vase"]
+    grasp_hints:
+      HOME:      [0.0,   0.0,   0.0,  0.0,  0.0]
+      PRE_PICK:  [-0.85, 0.0,   0.0,  0.0,  0.0]
+      PICK:      [-0.85,-1.25,  0.0,  0.7,  0.0]
+      LIFT:      [-0.85,-0.7,   0.3,  0.4,  0.0]
+      ARC_VIA:   [1.56, -0.7,   0.3,  0.4,  0.0]
+      PRE_PLACE: [1.56, -0.8,   0.0,  1.0,  0.0]
+    action_delta_range:
+      j1: 0.4
+      j2: 0.5
+      j3: 0.4
+      j4: 0.5
+      j5: 0.3
+
+# Joint limits [min, max] in radians
+joint_limits:
+  joint1: [-3.14, 3.14]
+  joint2: [-2.0,  0.5]
+  joint3: [-1.5,  1.5]
+  joint4: [-0.5,  2.0]
+  joint5: [-1.57, 1.57]
+
+# Drop zone marker
+drop_zone:
+  position: [-0.10, 0.00, 0.501]
+  sdf_name: drop_zone_marker
