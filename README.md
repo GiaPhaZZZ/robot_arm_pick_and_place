@@ -2,6 +2,8 @@
 
 A full reinforcement learning pipeline for training a 5-DOF robotic arm to autonomously pick up objects and place them in a target drop zone, running entirely inside a ROS 2 + Gazebo Harmonic simulation. The agent learns from raw depth-image observations using Soft Actor-Critic (SAC) with a two-stage incremental curriculum.
 
+![6DOF arm in Gazebo Stimulation_view1](pick_place/arm_fig1.jpg)
+
 ---
 
 ## Overview
