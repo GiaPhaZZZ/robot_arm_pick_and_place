@@ -177,6 +177,7 @@ tensorboard --logdir logs/
 | Action dimension | 30 | 5 joints × 6 phases |
 | State dimension | 64×64×1 | Depth image crop |
 
+![6DOF arm in Gazebo Stimulation_view2](pick_place/arm_fig2.jpg)
 ---
 
 ## Performance Notes
